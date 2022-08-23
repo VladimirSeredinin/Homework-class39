@@ -21,8 +21,38 @@ Full description at: https://github.com/HackYourFuture/Homework/tree/main/2-Brow
 
    https://media1.tenor.com/images/2de63e950fb254920054f9bd081e8157/tenor.gif
 -----------------------------------------------------------------------------*/
-function catWalk() {
-  // TODO complete this function
-}
+let cat=null;
+let danced=false;
+let interval=0;
 
-// TODO execute `catWalk` when the browser has completed loading the page
+function catWalk() {
+  if (cat){
+      let currentPosition=parseInt(cat.style.left.replace('px',''));
+      if ( (currentPosition>((document.body.clientWidth/2)-200))&&(!danced)){
+         clearInterval(interval);
+
+         cat.setAttribute('oldsrc',cat.getAttribute('src'));
+         cat.setAttribute('src','https://media1.tenor.com/images/2de63e950fb254920054f9bd081e8157/tenor.gif');
+         setTimeout(()=>{
+            cat.setAttribute('src',cat.getAttribute('oldsrc'));
+            danced=true;
+            interval=setInterval(catWalk,50)
+         },5000);
+      }
+      if (currentPosition>=(document.body.clientWidth-296)){
+         danced=false;
+         currentPosition=0;
+      }
+      cat.style.left=`${currentPosition+10}px`;
+  }else{
+      cat=Object.values(document.getElementsByTagName('img')).shift();
+      cat.style.position='absolute';
+      cat.style.top='calc(50vh-(336px/2))';
+      if (!cat.style.left){
+         cat.style.left='0px'
+      }
+      interval=setInterval(catWalk,50);
+  }
+}
+window.addEventListener('load', catWalk)
+
