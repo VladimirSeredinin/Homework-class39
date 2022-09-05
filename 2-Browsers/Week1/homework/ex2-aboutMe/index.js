@@ -13,8 +13,9 @@ window.addEventListener('load', main);
 
 function main() {
   document.body.style.fontFamily = 'Arial, sans-serif';
+  const ul = document.getElementsByTagName('ul');
 
-  for (const span of document.getElementsByTagName('span')) {
+  for (const span of ul[0].getElementsByTagName('span')) {
     switch (span.id) {
       case 'nickname':
         span.textContent = 'Vladimir';
@@ -27,7 +28,7 @@ function main() {
         break;
     }
   }
-  for (const li of document.getElementsByTagName('li')) {
+  for (const li of ul[0].getElementsByTagName('li')) {
     li.className = 'list-item';
     li.style.color = 'red';
   }
