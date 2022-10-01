@@ -3643,3 +3643,10 @@ Ran all test suites matching /ex4-diceRace.test.js/i.
 2022-09-20 10:15:03 error: *** Spell Checker Report ***
 
 
+2022-10-01 05:36:07 info: -----------------------------------------
+2022-10-01 05:36:07 info: >>> Running Unit Test `ex3-rollAnAce` <<<
+2022-10-01 05:36:07 info: -----------------------------------------
+2022-10-01 05:36:11 info: All unit tests passed.
+2022-10-01 05:36:13 error: *** Spell Checker Report ***
+
+

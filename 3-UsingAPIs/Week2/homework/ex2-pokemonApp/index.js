@@ -28,14 +28,17 @@ async function fetchData(url) {
   if (response.ok) {
     return response.json();
   }
-  throw new Error(error);
+  throw new Error(
+    `Unable to load resource "${url}", status is ${response.status}`
+  );
 }
 
 async function fetchAndPopulatePokemons(select, url) {
   while (select.firstChild) {
     select.removeChild(select.lastChild);
   }
-  select.appendChild(document.createElement('option'));
+  const firstOption = document.createElement('option');
+  select.appendChild(firstOption);
   try {
     const pokemons = await fetchData(url);
     pokemons.results.forEach((pokemon) => {
@@ -45,7 +48,7 @@ async function fetchAndPopulatePokemons(select, url) {
       select.appendChild(option);
     });
   } catch (error) {
-    throw new Error(error);
+    firstOption.textContent = `Error loading content: "${error}"`;
   }
 }
 
@@ -61,7 +64,7 @@ async function fetchImage(p, url) {
     img.setAttribute('alt', pokemon.name);
     p.appendChild(img);
   } catch (error) {
-    throw new Error(error);
+    p.textContent = `Error loading pokemon ${error}`;
   }
 }
 
@@ -80,14 +83,14 @@ function main() {
   button.textContent = 'Get pokemon!';
 
   const selector = document.createElement('select');
-  selector.addEventListener('change', () => {
+  selector.addEventListener('change', async (event) => {
     try {
-      fetchImage(p, selector.options[selector.selectedIndex].value);
+      fetchImage(p, event.target.value);
     } catch (error) {
       displayError(error);
     }
   });
-  button.addEventListener('click', () => {
+  button.addEventListener('click', async () => {
     try {
       fetchAndPopulatePokemons(selector, POKEMONS_URL);
     } catch (error) {
