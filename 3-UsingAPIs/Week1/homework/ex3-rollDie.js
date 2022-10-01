@@ -53,8 +53,6 @@ function main() {
     });
 }
 
-/* At lines 26 and 27, the condition is written that if the roll is greater than 6, an error occurs (rolling off the table).*/
-
 // ! Do not change or remove the code below
 if (process.env.NODE_ENV !== 'test') {
   main();

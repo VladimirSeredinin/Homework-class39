@@ -14,7 +14,7 @@ Complete the function called `checkDoubleDigits` such that:
 ------------------------------------------------------------------------------*/
 function checkDoubleDigits(digit) {
   return new Promise((resolve, reject) => {
-    if (digit > 9 && digit < 100) {
+    if (digit >= 10 && digit <= 99) {
       resolve('This is a double digit number!');
     } else {
       reject(new Error(`Expected a double digit number but got ${number}`));
